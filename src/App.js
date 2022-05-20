@@ -4,7 +4,6 @@ import Header from './components/Header/Header'
 import List from './components/List/List'
 import Map from './components/Map/Map'
 import { getPlacesData } from './api'
-import { RadioButtonUncheckedSharp } from "@material-ui/icons";
 const App = () => {
     const [ places, setPlaces ] = useState([]);
 
@@ -39,7 +38,7 @@ const App = () => {
                         setCoordinates={setCoordinates}
                         setBounds={setBounds}
                         coordinates={coordinates}
-                        bounds = {bounds}
+                        places = {places}
                     />
                     {console.log('gonderilen coords bunlar', coordinates,'gonderilen B bu', bounds)}
                 </Grid>
