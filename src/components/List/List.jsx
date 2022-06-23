@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { CircularProgress, Grid, InputLabel, MenuItem, FormControl, Select, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
-const List = ( { places }) => {
+const List = ( { places, childClicked, isLoading}) => {
     const classes = useStyles();
     const [ type, setType ] = useState('restaurants');
     const [ rating, setRating ] = useState('restaurants');
 
-
+    const ref = useRef([]);
+    
     return(
         <div className={classes.container}>
             <Typography variant="h4"> Restorantlar, Oteller ve attractions around you</Typography>
+            {isLoading ? (
+                <div className={classes.loading}>
+                    <CircularProgress size="5rem" />
+                </div>
+            ) : (
+                <>
             <FormControl className={classes.formControl}>
                 <InputLabel>Type</InputLabel>
                 <Select value={type} onChange={(e) => setType(e.target.value)}>
@@ -31,11 +38,24 @@ const List = ( { places }) => {
             </FormControl>
             <Grid container spacing={3} className={classes.list}>
                 {places?.map((x, i) => (
-                    <Grid item key={i} xs={12}>
-                        <PlaceDetails place={x}/>
+                    <Grid item key={i} xs={12}
+                    ref={(el) =>{
+                         if(!ref.current.includes(el)){
+                            ref.current.push(el)
+                         }
+                    }}
+                    >
+                        <PlaceDetails
+                            place={x}
+                            selected={Number(childClicked) === i }
+                            refProp={Number(childClicked) === i && ref.current[i]}    
+                                
+                        />
                     </Grid>
                 ))}
             </Grid>
+            </>
+            )}
         </div>
     );
 }
