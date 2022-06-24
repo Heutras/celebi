@@ -3,10 +3,9 @@ import { CircularProgress, Grid, InputLabel, MenuItem, FormControl, Select, Typo
 import useStyles from './styles';
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
-const List = ( { places, childClicked, isLoading}) => {
+const List = ( { places, childClicked, isLoading, type, setType, rating, setRating}) => {
     const classes = useStyles();
-    const [ type, setType ] = useState('restaurants');
-    const [ rating, setRating ] = useState('restaurants');
+
 
     const ref = useRef([]);
     
