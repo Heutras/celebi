@@ -23,7 +23,7 @@ const Header = ( { setCoordinates }) => {
                 </Typography>
                 <Box display="flex">
                     <Typography variant="h6" className={classes.title}>
-                        Yeni yerler keşfet
+                        Yeni yerler keşfe
                     </Typography>
                     <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
                         <div className={classes.search}>
